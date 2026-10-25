@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import PidDemo from "../components/PidDemo";
 import { getProjectBySlug } from "../data/projects";
 
 const resolveAsset = (path) =>
@@ -63,6 +64,10 @@ function TapeoutHeroGallery({ evidence }) {
 }
 
 function HeroAside({ project }) {
+  if (project.slug === "pid-car") {
+    return <PidDemo />;
+  }
+
   if (project.slug === "vector-cpu") {
     return <TapeoutHeroGallery evidence={project.evidence} />;
   }
