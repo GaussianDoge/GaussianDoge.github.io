@@ -1,10 +1,14 @@
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import PidDemo from "../components/PidDemo";
 import { getProjectBySlug } from "../data/projects";
 
 const resolveAsset = (path) =>
   `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+
+const resultEvidenceIds = {
+  "ooo-processor": ["overall-simulation"],
+  semg: ["results-table"],
+};
 
 function setDescription(content) {
   let description = document.querySelector('meta[name="description"]');
@@ -16,53 +20,51 @@ function setDescription(content) {
   description.content = content;
 }
 
-function ImplementationPanel({ implementation, compact = false }) {
-  const steps = compact
-    ? implementation.steps.slice(0, 3)
-    : implementation.steps;
-
+function ProjectIntroduction({ paragraphs }) {
   return (
-    <div className="implementation-panel">
-      <div className="implementation-panel-header">
-        <span>{implementation.label}</span>
-        <span>{implementation.stack}</span>
-      </div>
-      <ol className="implementation-steps">
-        {steps.map((step, index) => (
-          <li key={step.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <div>
-              <strong>{step.title}</strong>
-              <p>{step.description}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
+    <div className="detail-copy">
+      {paragraphs.map((paragraph) => (
+        <p key={paragraph}>{paragraph}</p>
+      ))}
     </div>
   );
 }
 
-function Narrative({ content }) {
+function TapeoutHeroGallery({ evidence }) {
+  const images = evidence.filter((item) => item.type === "image");
+
   return (
-    <div className="detail-copy">
-      {content.paragraphs?.map((paragraph) => (
-        <p key={paragraph}>{paragraph}</p>
+    <div className="tapeout-hero-gallery" aria-label="Tapeout project artifacts">
+      {images.map((item, index) => (
+        <figure className="tapeout-hero-card" key={item.id}>
+          <a
+            href={resolveAsset(item.path)}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${item.title.toLowerCase()} at full size`}
+          >
+            <img
+              src={resolveAsset(item.path)}
+              width={item.width}
+              height={item.height}
+              alt={item.alt}
+              fetchPriority={index === 0 ? "high" : "auto"}
+              decoding="async"
+            />
+          </a>
+          <figcaption>
+            <span>{item.title}</span>
+            <span aria-hidden="true">↗</span>
+          </figcaption>
+        </figure>
       ))}
-      {content.bullets?.length > 0 && (
-        <ul>
-          {content.bullets.map((bullet) => (
-            <li key={bullet}>{bullet}</li>
-          ))}
-        </ul>
-      )}
-      {content.note && <div className="detail-note-box">{content.note}</div>}
     </div>
   );
 }
 
 function HeroAside({ project }) {
-  if (project.slug === "pid-car") {
-    return <PidDemo />;
+  if (project.slug === "vector-cpu") {
+    return <TapeoutHeroGallery evidence={project.evidence} />;
   }
 
   const heroEvidence = project.evidence.find((item) => item.type === "image");
@@ -97,78 +99,75 @@ function HeroAside({ project }) {
   }
 
   return (
-    <aside aria-label={`${project.title} system overview`}>
-      <ImplementationPanel implementation={project.implementation} compact />
+    <aside className="project-summary-panel" aria-label={`${project.title} summary`}>
+      <span>{project.category}</span>
+      <strong>{project.focus}</strong>
+      <p>{project.technologies.join(" · ")}</p>
     </aside>
   );
 }
 
-function EvidenceGallery({ project }) {
-  const galleryEvidence = project.evidence.filter(
-    (item) => item.gallery !== false,
-  );
-
-  if (galleryEvidence.length === 0) {
+function SelectedResults({ project }) {
+  const evidenceIds = resultEvidenceIds[project.slug];
+  if (!evidenceIds) {
     return null;
   }
 
+  const resultEvidence = evidenceIds
+    .map((id) => project.evidence.find((item) => item.id === id))
+    .filter(Boolean);
+  const resultMetrics =
+    project.slug === "ooo-processor"
+      ? project.results.metrics.slice(0, 1)
+      : project.results.metrics;
+
   return (
-    <section className="detail-section" id="evidence" aria-labelledby="evidence-title">
+    <section
+      className="project-results-section"
+      aria-labelledby={`${project.slug}-results-title`}
+    >
       <div className="wrap">
-        <div className="detail-section-title">
-          <p className="eyebrow">05 / EVIDENCE</p>
-          <h2 id="evidence-title">Inspect the project artifacts.</h2>
+        <div className="project-results-head">
+          <div>
+            <p className="eyebrow">SELECTED RESULTS</p>
+            <h2 id={`${project.slug}-results-title`}>{project.results.heading}</h2>
+          </div>
+          <div
+            className={`compact-result-metrics${resultMetrics.length === 1 ? " single" : ""}`}
+            aria-label="Selected project metrics"
+          >
+            {resultMetrics.map((metric) => (
+              <div key={`${metric.value}-${metric.label}`}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className={`evidence-grid${galleryEvidence.length === 3 ? " three" : ""}`}>
-          {galleryEvidence.map((item) => {
-            const assetUrl = resolveAsset(item.path);
-            if (item.type === "pdf") {
-              const reportUrl = item.page ? `${assetUrl}#page=${item.page}` : assetUrl;
-              return (
-                <article className="external-demo" key={item.id}>
-                  <div>
-                    <span className="play-icon" aria-hidden="true">
-                      ↗
-                    </span>
-                    <h2>{item.title}</h2>
-                    <p>{item.caption}</p>
-                    <a href={reportUrl} target="_blank" rel="noopener noreferrer">
-                      {item.page ? `Open report · page ${item.page}` : "Open report"}
-                    </a>
-                  </div>
-                </article>
-              );
-            }
-
-            const cardClass = [
-              "evidence-card",
-              project.slug === "vector-cpu" && item.id === "chip-layout"
-                ? "dark"
-                : "",
-              item.id.includes("photo") || item.id === "car-still" ? "photo" : "",
-            ]
-              .filter(Boolean)
-              .join(" ");
-
-            return (
-              <figure className={cardClass} key={item.id}>
-                <a href={assetUrl} target="_blank" rel="noopener noreferrer">
-                  <img
-                    src={assetUrl}
-                    width={item.width}
-                    height={item.height}
-                    alt={item.alt}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-                <figcaption>
-                  <strong>{item.title}</strong>
-                  <span>{item.caption} Open artifact ↗</span>
-                </figcaption>
-              </figure>
-            );
-          })}
+        <div className={`result-gallery${resultEvidence.length === 1 ? " single" : ""}`}>
+          {resultEvidence.map((item) => (
+            <figure className="result-card" key={item.id}>
+              <a
+                href={resolveAsset(item.path)}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open ${item.title.toLowerCase()} at full size`}
+              >
+                <img
+                  src={resolveAsset(item.path)}
+                  width={item.width}
+                  height={item.height}
+                  alt={item.alt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </a>
+              <figcaption>
+                <strong>{item.title}</strong>
+                <span>{item.caption}</span>
+              </figcaption>
+            </figure>
+          ))}
         </div>
       </div>
     </section>
@@ -255,14 +254,6 @@ export default function ProjectDetailPage() {
                 <dt>Period</dt>
                 <dd>{project.date}</dd>
               </div>
-              <div>
-                <dt>Role / team</dt>
-                <dd>{project.team}</dd>
-              </div>
-              <div>
-                <dt>Focus</dt>
-                <dd>{project.focus}</dd>
-              </div>
             </dl>
           </div>
           <HeroAside project={project} />
@@ -272,69 +263,14 @@ export default function ProjectDetailPage() {
       <section className="detail-section" aria-labelledby="overview-title">
         <div className="wrap detail-layout">
           <div className="detail-section-title">
-            <p className="eyebrow">01 / OVERVIEW &amp; ROLE</p>
+            <p className="eyebrow">PROJECT INTRODUCTION</p>
             <h2 id="overview-title">{project.overview.heading}</h2>
           </div>
-          <Narrative content={project.overview} />
+          <ProjectIntroduction paragraphs={project.overview.paragraphs} />
         </div>
       </section>
 
-      <section className="detail-section" aria-labelledby="problem-title">
-        <div className="wrap detail-layout">
-          <div className="detail-section-title">
-            <p className="eyebrow">02 / PROBLEM &amp; CONSTRAINTS</p>
-            <h2 id="problem-title">{project.problem.heading}</h2>
-          </div>
-          <Narrative content={project.problem} />
-        </div>
-      </section>
-
-      <section className="detail-section" aria-labelledby="implementation-title">
-        <div className="wrap detail-layout">
-          <div className="detail-section-title">
-            <p className="eyebrow">03 / IMPLEMENTATION</p>
-            <h2 id="implementation-title">{project.implementation.heading}</h2>
-          </div>
-          <ImplementationPanel implementation={project.implementation} />
-        </div>
-      </section>
-
-      <section className="detail-section" aria-labelledby="results-title">
-        <div className="wrap detail-layout">
-          <div className="detail-section-title">
-            <p className="eyebrow">04 / VERIFICATION &amp; RESULTS</p>
-            <h2 id="results-title">{project.results.heading}</h2>
-          </div>
-          <div className="detail-copy">
-            {project.results.metrics.length > 0 && (
-              <div className="detail-metrics" aria-label="Selected project results">
-                {project.results.metrics.map((metric) => (
-                  <div key={`${metric.value}-${metric.label}`}>
-                    <strong>{metric.value}</strong>
-                    <span>{metric.label}</span>
-                    {metric.detail && <small>{metric.detail}</small>}
-                  </div>
-                ))}
-              </div>
-            )}
-            {project.results.paragraphs.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
-            {project.results.bullets?.length > 0 && (
-              <ul>
-                {project.results.bullets.map((bullet) => (
-                  <li key={bullet}>{bullet}</li>
-                ))}
-              </ul>
-            )}
-            {project.results.note && (
-              <div className="detail-note-box">{project.results.note}</div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <EvidenceGallery project={project} />
+      <SelectedResults project={project} />
 
       <nav className="project-pager wrap" aria-label="Project navigation">
         <Link to={`/projects/${previousProject.slug}`}>

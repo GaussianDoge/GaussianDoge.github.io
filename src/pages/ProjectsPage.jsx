@@ -16,9 +16,10 @@ const categoryDescriptions = {
 const cardEvidenceIds = {
   "vector-cpu": "chip-layout",
   "ooo-processor": "architecture",
-  "pid-car": "car-still",
-  semg: "results-table",
+  "pid-car": "car-closeup",
+  semg: "signal-overview",
   eventhub: "discovery-interface",
+  "rpg-engine": "game-demo",
 };
 
 const placeholders = {
@@ -94,7 +95,7 @@ export default function ProjectsPage() {
       document.head.append(description);
     }
     description.content =
-      "Explore Zhengwen Tang’s digital hardware, embedded systems, machine-learning, and software engineering projects.";
+      "Explore Zhengwen Tang’s digital design, embedded systems, machine-learning, and software engineering projects.";
   }, []);
 
   return (

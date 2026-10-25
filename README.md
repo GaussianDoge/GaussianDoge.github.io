@@ -1,6 +1,6 @@
 # Zhengwen Tang — Portfolio
 
-A React and Vite portfolio featuring professional experience, research, coursework, and detailed project pages across digital hardware, embedded systems, machine learning, and software.
+A React and Vite portfolio featuring professional experience, research, coursework, and detailed project pages across digital design, embedded systems, machine learning, and software.
 
 ## Run locally
 

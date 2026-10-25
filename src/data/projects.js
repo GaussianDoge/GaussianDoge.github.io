@@ -1,5 +1,5 @@
 export const projectCategories = [
-  { id: "digital", label: "Digital Hardware" },
+  { id: "digital", label: "Digital Design" },
   { id: "embedded", label: "Embedded Systems" },
   { id: "machine-learning", label: "Machine Learning" },
   { id: "software", label: "Software" },
@@ -8,11 +8,11 @@ export const projectCategories = [
 export const projects = [
   {
     slug: "vector-cpu",
-    title: "RISC-V vector CPU tapeout",
+    title: "RISC-V vector CPU Tapeout",
     shortTitle: "Vector CPU tapeout",
-    category: "Digital Hardware",
+    category: "Digital Design",
     categoryId: "digital",
-    eyebrow: "01 / DIGITAL HARDWARE · TAPEOUT",
+    eyebrow: "01 / DIGITAL DESIGN · TAPEOUT",
     lead: "A 32-bit processor project spanning SystemVerilog RTL, functional verification, physical implementation in a TSMC 180 nm process, and a custom PCB for post-fabrication testing.",
     context: "UCLA tapeout project",
     date: "2026",
@@ -21,7 +21,7 @@ export const projects = [
     technologies: ["SystemVerilog", "RISC-V", "Cadence", "Hammer", "KiCad", "TSMC 180 nm"],
     externalActions: [],
     overview: {
-      heading: "From RTL to a board-level test interface.",
+      heading: "Digital Tapeout and Test.",
       paragraphs: [
         "The project joined processor design with the later stages of the hardware lifecycle. I implemented and functionally verified processor RTL, then contributed to synthesis, place and route, layout, and the integration of the core with its pad frame.",
         "I also designed the custom PCB intended to expose the fabricated design for testing. That work connected the chip-level interface to board-level headers and support components, making signal access and practical lab use part of the design problem.",
@@ -60,9 +60,9 @@ export const projects = [
       metrics: [],
     },
     evidence: [
-      { id: "chip-layout", type: "image", path: "/assets/chip-physical-layout.png", title: "Chip physical layout", caption: "Processor core with I/O and power-pad integration.", alt: "Physical layout of a processor core surrounded by I/O and power pads.", width: 1173, height: 1124 },
-      { id: "pcb-layout", type: "image", path: "/assets/chip-test-board-layout.png", title: "Test PCB layout", caption: "Signal routing, connector placement, and ground fill.", alt: "PCB layout showing routed connections between the central device footprint, passive components, and pin headers.", width: 1010, height: 1025 },
-      { id: "pcb-photo", type: "image", path: "/assets/chip-test-board.jpg", title: "Assembled test PCB", caption: "Group 25 board with a central device and breakout headers.", alt: "Assembled green test PCB with a small central device, surface-mount components, breakout headers, and four mounting holes.", width: 2728, height: 2728 },
+      { id: "chip-layout", type: "image", path: "/assets/chip-physical-layout.png", title: "Chip physical layout", caption: "Processor core with I/O and power-pad integration.", alt: "Physical layout of a processor core surrounded by I/O and power pads.", width: 1173, height: 1124, gallery: false },
+      { id: "pcb-layout", type: "image", path: "/assets/chip-test-board-layout.png", title: "Test PCB layout", caption: "Signal routing, connector placement, and ground fill.", alt: "PCB layout showing routed connections between the central device footprint, passive components, and pin headers.", width: 1010, height: 1025, gallery: false },
+      { id: "pcb-photo", type: "image", path: "/assets/chip-test-board.jpg", title: "Assembled test PCB", caption: "Group 25 board with a central device and breakout headers.", alt: "Assembled green test PCB with a small central device, surface-mount components, breakout headers, and four mounting holes.", width: 2728, height: 2728, gallery: false },
     ],
     previousSlug: "rpg-engine",
     nextSlug: "ooo-processor",
@@ -71,9 +71,9 @@ export const projects = [
     slug: "ooo-processor",
     title: "Out-of-order RISC-V processor",
     shortTitle: "Out-of-order RISC-V",
-    category: "Digital Hardware",
+    category: "Digital Design",
     categoryId: "digital",
-    eyebrow: "02 / DIGITAL HARDWARE · MICROARCHITECTURE",
+    eyebrow: "02 / DIGITAL DESIGN · MICROARCHITECTURE",
     lead: "A one-wide, 32-bit out-of-order core implemented in SystemVerilog, with register renaming, dynamic scheduling, in-order retirement, memory ordering, and checkpoint-based recovery.",
     context: "UCLA ECE 189 honors project",
     date: "September–December 2025",
@@ -205,8 +205,9 @@ export const projects = [
       note: "The result describes the course lab competition. No lap time or broader benchmark is claimed.",
     },
     evidence: [
-      { id: "car-animation", type: "image", path: "/assets/pid-car-demo.webp", title: "Hardware in motion", caption: "Autonomous line-following car moving during a lab test.", alt: "Autonomous line-following car moving during a lab test.", width: 320, height: 568, animated: true },
-      { id: "car-still", type: "image", path: "/assets/pid-car-demo-still.jpg", title: "Lab-test still", caption: "Supplied frame from the physical-car demonstration.", alt: "Autonomous PID line-following car held above the lab track during testing.", width: 320, height: 568 },
+      { id: "car-closeup", type: "image", path: "/assets/pid-car-closeup.png", title: "PID car hardware", caption: "Close-up of the assembled line-following car used for physical testing.", alt: "Close-up of the red circular autonomous PID line-following car and its controller board.", width: 661, height: 661, gallery: false },
+      { id: "car-animation", type: "image", path: "/assets/pid-car-demo.webp", title: "Hardware in motion", caption: "Autonomous line-following car moving during a lab test.", alt: "Autonomous line-following car moving during a lab test.", width: 320, height: 568, animated: true, gallery: false },
+      { id: "car-still", type: "image", path: "/assets/pid-car-demo-still.jpg", title: "Lab-test still", caption: "Supplied frame from the physical-car demonstration.", alt: "Autonomous PID line-following car held above the lab track during testing.", width: 320, height: 568, gallery: false },
     ],
     previousSlug: "ooo-processor",
     nextSlug: "semg",
@@ -218,7 +219,7 @@ export const projects = [
     category: "Machine Learning",
     categoryId: "machine-learning",
     eyebrow: "04 / MACHINE LEARNING",
-    lead: "A three-person study of sequence models for decoding text from noisy wrist surface-electromyography signals.",
+    lead: "A study of sequence models for decoding text from noisy wrist surface-electromyography signals.",
     context: "UCLA machine-learning project",
     date: "January–March 2026",
     focus: "Single-subject sequence-model comparison",
@@ -228,10 +229,10 @@ export const projects = [
       { label: "View source on GitHub", href: "https://github.com/GaussianDoge/sEMG_Keystroke_Prediction" },
     ],
     overview: {
-      heading: "Learning text from muscle signals.",
+      heading: "Muscle Signals to Text.",
       paragraphs: [
-        "I worked in a three-person team to evaluate how recurrent, residual, and attention-based sequence models decode keystrokes from wrist sEMG. The study used the emg2qwerty pipeline and measured output quality with character error rate.",
-        "The team compared several model families under a consistent single-subject evaluation. This made the project an architecture study as well as a signal-processing task: each experiment changed how temporal structure was represented while preserving a shared training and evaluation path.",
+        "I evaluated how recurrent, residual, and attention-based sequence models decode keystrokes from wrist sEMG. The study used the emg2qwerty pipeline and measured output quality with character error rate.",
+        "I compared several model families under a consistent single-subject evaluation. This made the project an architecture study as well as a signal-processing task: each experiment changed how temporal structure was represented while preserving a shared training and evaluation path.",
       ],
       bullets: [
         "Prepared time-frequency input features from the recorded signal.",
@@ -273,6 +274,7 @@ export const projects = [
       note: "CER values are specific to the report’s training setup and Subject 89335547. They should not be read as a cross-subject benchmark.",
     },
     evidence: [
+      { id: "signal-overview", type: "image", path: "/assets/semg-signal-overview.png", title: "Bilateral wrist sEMG signals", caption: "Muscle-activity traces aligned with typed characters, alongside the wristband sensor placement.", alt: "Right- and left-hand sEMG traces aligned with the text the quick brown fox, with a wristband sensor and a wrist cross-section showing digit flexor and extensor placement.", width: 1096, height: 510, gallery: false },
       { id: "results-table", type: "image", path: "/assets/semg-results-table.png", title: "Model comparison", caption: "Validation and test character error rates after 40 and 150 epochs.", alt: "Table comparing model validation and test character error rates after 40 and 150 epochs.", width: 1264, height: 628 },
       { id: "project-report", type: "pdf", path: "/assets/semg-keystroke-prediction.pdf", title: "Project report", caption: "Experimental setup, model variants, training behavior, results, and team analysis.", alt: "PDF report for the sEMG keystroke prediction project.", page: 5 },
     ],
@@ -297,7 +299,7 @@ export const projects = [
       { label: "Watch demo from 5:04", href: "https://www.youtube.com/watch?v=_q9G_yhAYJg&t=304s" },
     ],
     overview: {
-      heading: "Connecting event discovery with conversation.",
+      heading: "Event Discovery & Conversation.",
       paragraphs: [
         "EventHub was developed as a UCLA CS 35L team project. The product combines event pages and media with lightweight social features so people can follow events and discuss them in one application.",
         "My work covered the React event experience and the data path behind it. I built pages with images and video, likes and follows, comments and replies, then connected those interactions to MongoDB models, Express APIs, and Zustand-managed client state.",
@@ -368,7 +370,7 @@ export const projects = [
     technologies: ["WebRTC", "React Native", "Firebase", "Firestore"],
     externalActions: [],
     overview: {
-      heading: "Building the path between peers.",
+      heading: "Peer to Peer Mesh Network.",
       paragraphs: [
         "Meow Talk is a real-time video chat application started in July 2025. I implemented its multi-peer communication path with WebRTC, built the application interface in React Native, and used Firebase and Firestore for connection data.",
         "The project sits at the boundary between user-interface state and networked media. Each participant needs an interface that reacts to connection changes while the application coordinates a separate media relationship with every other peer.",
@@ -413,16 +415,19 @@ export const projects = [
     categoryId: "software",
     eyebrow: "07 / SOFTWARE · GAME SYSTEMS",
     lead: "A C++ and SFML engine that brings together game states, animated sprites, camera-relative rendering, interactions, audio, weather, and custom controls.",
-    context: "CCSF honors project",
+    context: "SFML Game Engine",
     date: "January–May 2024",
     focus: "Real-time game systems",
     team: "C++ and SFML implementation",
     technologies: ["C++", "SFML", "Game loops", "Sprite animation"],
-    externalActions: [],
+    externalActions: [
+      { label: "View source on GitHub", href: "https://github.com/GaussianDoge/SFML_Game_Engine" },
+      { label: "Watch gameplay demo", href: "https://www.youtube.com/watch?v=3ob6iMFa3IA" },
+    ],
     overview: {
-      heading: "Learning real-time systems by building one.",
+      heading: "Real Time Rendering.",
       paragraphs: [
-        "This City College of San Francisco honors project explored the structure behind a 2D role-playing game. I built the engine in C++ with SFML and connected the core loop to rendering, animation, interaction, audio, weather, and interface behavior.",
+        "This project explored the structure behind a 2D role-playing game. I built the engine in C++ with SFML and connected the core loop to rendering, animation, interaction, audio, weather, and interface behavior.",
         "Rather than treating those features as isolated demonstrations, the project organized them into shared game states and an update-and-render cycle that could support a complete interactive scene.",
       ],
     },
@@ -448,12 +453,25 @@ export const projects = [
     results: {
       heading: "An integrated engine foundation.",
       paragraphs: [
-        "The completed honors project integrated game-state management, animated sprites, camera rendering, hitboxes and interactions, sound playback, a rain system, and mouse-driven UI controls in one C++/SFML engine.",
-        "Elapsed-time updates kept movement logic independent of raw frame count. This page reports the implemented systems without adding an unverified frame-rate figure, public build, or repository link.",
+        "The completed project integrated game-state management, animated sprites, camera rendering, hitboxes and interactions, sound playback, a rain system, and mouse-driven UI controls in one C++/SFML engine.",
+        "Elapsed-time updates kept movement logic independent of raw frame count. The gameplay demo and source repository document the integrated result without adding an unverified frame-rate figure or public build claim.",
       ],
       metrics: [],
     },
-    evidence: [],
+    evidence: [
+      {
+        id: "game-demo",
+        type: "image",
+        path: "/assets/sfml-game-engine-demo.webp",
+        title: "Engine gameplay",
+        caption: "Animated capture of the game interface and rendered world.",
+        alt: "Animated demonstration of the SFML role-playing game engine, including the menu and game world.",
+        width: 480,
+        height: 270,
+        animated: true,
+        gallery: false,
+      },
+    ],
     previousSlug: "meow-talk",
     nextSlug: "vector-cpu",
   },

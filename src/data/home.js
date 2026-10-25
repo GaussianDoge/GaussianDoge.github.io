@@ -4,6 +4,8 @@ export const homeData = {
     description:
       "Zhengwen Tang is a UCLA Computer Science and Engineering student working across processor architecture, embedded systems, hardware security, machine learning, and software engineering.",
   },
+
+  // Home page introduction
   profile: {
     name: "Zhengwen Tang",
     shortMark: "zt.",
@@ -17,7 +19,6 @@ export const homeData = {
     },
     interests: [
       "Architecture",
-      "GPU scheduling",
       "Security",
       "Embedded systems",
       "Machine learning",
@@ -38,8 +39,10 @@ export const homeData = {
       alt: "Physical layout of a processor core surrounded by I/O and power pads.",
     },
   },
+  
+  // Professional experience section
   experience: {
-    eyebrow: "01 / EXPERIENCE & RESEARCH",
+    eyebrow: "01 / PROFESSIONAL EXPERIENCE",
     title: "Research across security and architecture.",
     summary: "Embedded security, measurement automation, and chiplet-GPU scheduling.",
     date: "May 2026 — Present",
@@ -47,25 +50,30 @@ export const homeData = {
     organization: "Secure Systems and Architectures Lab",
     institution: "University of California, Los Angeles",
     lead:
-      "I investigate how low-level behavior and architectural choices affect secure, efficient systems—from instruction-level power leakage to scheduling and placement in chiplet GPUs.",
+      `I studied hardware and software systems security and low-level performance optimization, 
+      focusing on instruction-level side-channel attacks and GPU scheduling policies.`,
     highlights: [
       {
         title: "Hardware security",
         description:
-          "Study power side channels in cryptographic workloads using STM32 microcontrollers, ChipWhisperer, oscilloscopes, signal processing, and machine-learning analysis.",
+          `Explored power side-channel vulnerabilities in widely used encryption algorithms (AES, ARIA, LEA, and SEED)
+           using STM32 microcontrollers, ChipWhisperer, oscilloscopes, signal processing, and machine learning.`,
       },
       {
-        title: "Measurement systems",
+        title: "Automated experiment pipeline",
         description:
-          "Develop embedded C firmware, ARM Cortex-M0 assembly workloads, and Python automation for flashing boards, capturing power traces, and reproducing experiments.",
+          `Developed Python scripts to automatically generate thousands of embedded C firmware and ARM Cortex-M0 
+            assembly payloads and enable automatic board-drive flash and instruction-level power traces on an oscilloscope.`,
       },
       {
-        title: "GPU architecture",
+        title: "GPU scheduling and architecture",
         description:
           "Explore scheduling policies and chiplet placement for LLM workloads on chiplet-based GPU architectures.",
       },
     ],
   },
+
+  // Projects section
   projects: {
     eyebrow: "02 / PROJECTS",
     title: "Projects.",
@@ -74,7 +82,7 @@ export const homeData = {
     categories: [
       {
         slug: "digital",
-        title: "Digital Hardware",
+        title: "Digital Design",
         description:
           "Processor microarchitecture, RTL verification, physical design, and tapeout support.",
         projects: [
@@ -117,7 +125,6 @@ export const homeData = {
     courses: [
       "Computer Systems Architecture",
       "Digital Circuits",
-      "Digital Design",
       "Digital Design Laboratory",
       "Design and Experimental Verification of CMOS Circuits",
       "Electrical and Electronic Circuits",
@@ -140,8 +147,11 @@ export const homeData = {
     eyebrow: "04 / BACKGROUND",
     title: "Across the hardware–software boundary.",
     paragraphs: [
-      "I’m studying Computer Science and Engineering at the University of California, Los Angeles. My work spans processor microarchitecture, digital implementation, embedded control, hardware security research, machine learning, and full-stack applications.",
-      "I’m especially interested in architecture, GPU scheduling, and security—and in turning those ideas into systems that can be implemented, measured, and explained clearly.",
+      `I’m studying Computer Science and Engineering at the University of California, 
+        Los Angeles. My work spans processor microarchitecture, digital implementation, 
+        embedded control, hardware security research, machine learning, and full-stack applications.`,
+      `I’m especially interested in architecture, GPU scheduling, and security—and 
+      in turning those ideas into systems that can be implemented, measured, and explained clearly.`,
     ],
   },
   skills: [

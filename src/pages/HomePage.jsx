@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 import { homeData } from "../data/home.js";
 
 const sectionNumber = (index) => String(index + 1).padStart(2, "0");
-const assetUrl = (path) =>
-  `${import.meta.env.BASE_URL}assets/${path.replace(/^\/?assets\//, "")}`;
 
 function HomePage() {
   const {
@@ -13,8 +11,6 @@ function HomePage() {
     experience,
     projects,
     coursework,
-    background,
-    skills,
     contact,
   } = homeData;
 
@@ -32,90 +28,108 @@ function HomePage() {
 
   return (
     <main id="main" className="home-page">
-      <Hero profile={profile} />
+      <Hero profile={profile} contact={contact} />
       <ExperienceSection experience={experience} />
       <ProjectsSection projects={projects} />
       <CourseworkSection coursework={coursework} />
-      <BackgroundSection background={background} profile={profile} skills={skills} />
       <ContactSection contact={contact} />
     </main>
   );
 }
 
-function Hero({ profile }) {
-  const artifact = profile.featuredArtifact;
+function ContactIcon({ type }) {
+  if (type === "email") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="m4 7 8 6 8-6" />
+      </svg>
+    );
+  }
 
+  if (type === "github") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3.28-.36 6.72-1.61 6.72-7.25A5.65 5.65 0 0 0 19.22 3.3 5.4 5.4 0 0 0 19.13 1S17.95.65 15 2.48a13.38 13.38 0 0 0-6 0C6.05.65 4.87 1 4.87 1a5.4 5.4 0 0 0-.09 2.3A5.65 5.65 0 0 0 8.06 14.5 4.8 4.8 0 0 0 7 18v4" />
+        <path d="M9 18c-4.51 2-5-2-7-2" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="5" cy="5" r="2" />
+      <path d="M3 9h4v12H3zM11 9h4v2a4.5 4.5 0 0 1 8 3v7h-4v-6.5a2 2 0 0 0-4 0V21h-4z" />
+    </svg>
+  );
+}
+
+function ContactIcons({ email, links }) {
+  const contacts = [
+    { type: "email", label: "Email", href: `mailto:${email}` },
+    { type: "github", label: "GitHub", href: links.github, external: true },
+    { type: "linkedin", label: "LinkedIn", href: links.linkedin, external: true },
+  ];
+
+  return (
+    <ul className="contact-icons" aria-label="Contact links">
+      {contacts.map((item) => (
+        <li key={item.type}>
+          <a
+            className="contact-icon"
+            href={item.href}
+            aria-label={item.label}
+            title={item.label}
+            target={item.external ? "_blank" : undefined}
+            rel={item.external ? "noopener noreferrer" : undefined}
+          >
+            <ContactIcon type={item.type} />
+            <span className="sr-only">{item.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Hero({ profile, contact }) {
   return (
     <section className="hero wrap" id="home" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="eyebrow">
-          <span className="status-dot" aria-hidden="true" /> {profile.eyebrow}
-        </p>
-        <h1 id="hero-title">
-          Zhengwen
-          <br />
-          <span>Tang.</span>
-        </h1>
-        <p className="intro">{profile.introduction}</p>
-        <div className="hero-actions">
-          <Link className="button" to="/?section=experience">
-            View my work <span aria-hidden="true">↓</span>
-          </Link>
-          <a
-            className="text-link"
-            href={profile.links.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            GitHub <span aria-hidden="true">↗</span>
-          </a>
+        <div className="hero-identity">
+          <p className="eyebrow">
+            <span className="status-dot" aria-hidden="true" /> {profile.eyebrow}
+          </p>
+          <h1 id="hero-title">
+            Zhengwen
+            <br />
+            <span>Tang.</span>
+          </h1>
         </div>
-        <dl className="profile-facts">
-          <div>
-            <dt>Education</dt>
-            <dd>
-              {profile.education.degree}
-              <br />
-              {profile.education.institution}
-            </dd>
+        <div className="hero-summary">
+          <p className="intro">{profile.introduction}</p>
+          <div className="hero-actions">
+            <Link className="button" to="/?section=experience">
+              View my work <span aria-hidden="true">↓</span>
+            </Link>
+            <ContactIcons email={contact.email} links={profile.links} />
           </div>
-          <div>
-            <dt>Interests</dt>
-            <dd>{profile.interests.join(" · ")}</dd>
-          </div>
-        </dl>
+          <dl className="profile-facts">
+            <div>
+              <dt>Education</dt>
+              <dd>
+                {profile.education.degree}
+                <br />
+                {profile.education.institution}
+              </dd>
+            </div>
+            <div>
+              <dt>Interests</dt>
+              <dd>{profile.interests.join(" · ")}</dd>
+            </div>
+          </dl>
+        </div>
       </div>
-
-      {/* <figure className="chip-figure">
-        <div className="figure-top">
-          <span>01 / {artifact.label}</span>
-          <span>{artifact.discipline}</span>
-        </div>
-        <img
-          className="chip-art"
-          src={assetUrl(artifact.image)}
-          width={artifact.width}
-          height={artifact.height}
-          alt={artifact.alt}
-          decoding="async"
-        />
-        <figcaption>
-          <span>{artifact.title}</span>
-          <span>Project artifact</span>
-        </figcaption>
-      </figure> */}
-
-      {/* <div className="hero-foot">
-        <span>{profile.education.shortInstitution} · Computer Science & Engineering</span>
-        <span>
-          {profile.primaryTools.map((tool, index) => (
-            <span key={tool}>
-              {index > 0 && <span className="slash"> / </span>}
-              {tool}
-            </span>
-          ))}
-        </span>
-      </div> */}
     </section>
   );
 }
@@ -130,19 +144,16 @@ function ExperienceSection({ experience }) {
       <div className="section-heading">
         <div>
           <p className="eyebrow">{experience.eyebrow}</p>
-          <h2 id="experience-title">{experience.title}</h2>
+          {/* <h2 id="experience-title">{experience.title}</h2> */}
         </div>
         <p>{experience.summary}</p>
       </div>
       <article className="experience-entry">
         <div className="experience-role">
           <p className="experience-date">{experience.date}</p>
-          <h3>{experience.role}</h3>
-          <p>
-            {experience.organization}
-            <br />
-            {experience.institution}
-          </p>
+          <h3>{experience.organization}</h3>
+          <h4>{experience.institution}</h4>
+          <p>{experience.role}</p>
         </div>
         <div className="experience-body">
           <p className="experience-lead">{experience.lead}</p>
@@ -222,36 +233,6 @@ function CourseworkSection({ coursework }) {
           <li key={course}>{course}</li>
         ))}
       </ul>
-    </section>
-  );
-}
-
-function BackgroundSection({ background, profile, skills }) {
-  return (
-    <section className="wrap section about-section" id="about" aria-labelledby="about-title">
-      <div>
-        <p className="eyebrow">{background.eyebrow}</p>
-        <h2 id="about-title">{background.title}</h2>
-        {background.paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
-        <a
-          className="text-link"
-          href={profile.links.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Connect on LinkedIn <span aria-hidden="true">↗</span>
-        </a>
-      </div>
-      <div className="skills" aria-label="Technical skills">
-        {skills.map((skill) => (
-          <div key={skill.title}>
-            <h3>{skill.title}</h3>
-            <p>{skill.items.join(" · ")}</p>
-          </div>
-        ))}
-      </div>
     </section>
   );
 }
