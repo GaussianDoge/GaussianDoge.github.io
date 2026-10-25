@@ -65,29 +65,6 @@ function HeroAside({ project }) {
     return <PidDemo />;
   }
 
-  if (project.slug === "eventhub") {
-    const demo = project.externalActions.find((action) =>
-      action.href.includes("youtube.com"),
-    );
-    return (
-      <aside className="external-demo" aria-label="EventHub video demo">
-        <div>
-          <span className="play-icon" aria-hidden="true">
-            ▶
-          </span>
-          <h2>See the application in context</h2>
-          <p>
-            The team demonstration covers EventHub’s user experience. The project
-            segment begins at 5 minutes, 4 seconds.
-          </p>
-          <a href={demo.href} target="_blank" rel="noopener noreferrer">
-            Open the demo on YouTube ↗
-          </a>
-        </div>
-      </aside>
-    );
-  }
-
   const heroEvidence = project.evidence.find((item) => item.type === "image");
   if (heroEvidence) {
     const visualClass = [
@@ -127,7 +104,11 @@ function HeroAside({ project }) {
 }
 
 function EvidenceGallery({ project }) {
-  if (project.evidence.length === 0) {
+  const galleryEvidence = project.evidence.filter(
+    (item) => item.gallery !== false,
+  );
+
+  if (galleryEvidence.length === 0) {
     return null;
   }
 
@@ -138,8 +119,8 @@ function EvidenceGallery({ project }) {
           <p className="eyebrow">05 / EVIDENCE</p>
           <h2 id="evidence-title">Inspect the project artifacts.</h2>
         </div>
-        <div className={`evidence-grid${project.evidence.length === 3 ? " three" : ""}`}>
-          {project.evidence.map((item) => {
+        <div className={`evidence-grid${galleryEvidence.length === 3 ? " three" : ""}`}>
+          {galleryEvidence.map((item) => {
             const assetUrl = resolveAsset(item.path);
             if (item.type === "pdf") {
               const reportUrl = item.page ? `${assetUrl}#page=${item.page}` : assetUrl;

@@ -18,14 +18,10 @@ const cardEvidenceIds = {
   "ooo-processor": "architecture",
   "pid-car": "car-still",
   semg: "results-table",
+  eventhub: "discovery-interface",
 };
 
 const placeholders = {
-  eventhub: {
-    label: "MERN + ZUSTAND",
-    title: "Events, social state, and threaded discussion.",
-    description: "A full-stack path from MongoDB records to responsive React interactions.",
-  },
   "meow-talk": {
     label: "WEBRTC PEER MESH",
     title: "Real-time media across multiple peers.",

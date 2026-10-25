@@ -335,7 +335,21 @@ export const projects = [
       ],
       metrics: [],
     },
-    evidence: [],
+    evidence: [
+      {
+        id: "discovery-interface",
+        type: "image",
+        path: "/assets/eventhub-discovery-feed.png",
+        title: "EventHub discovery interface",
+        caption:
+          "Event discovery feed with mixed media, search, profiles, and like counts.",
+        alt:
+          "EventHub discovery page with a sidebar, search bar, and a masonry feed of image and video event posts with profiles and like counts.",
+        width: 1535,
+        height: 964,
+        gallery: false,
+      },
+    ],
     previousSlug: "semg",
     nextSlug: "meow-talk",
   },

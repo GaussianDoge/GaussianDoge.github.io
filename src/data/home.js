@@ -7,9 +7,9 @@ export const homeData = {
   profile: {
     name: "Zhengwen Tang",
     shortMark: "zt.",
-    eyebrow: "HELLO, I’M",
+    eyebrow: "Hi, I’M",
     introduction:
-      "I’m a Computer Science and Engineering student at UCLA. I build and study systems across processor architecture, embedded control, hardware security, machine learning, and full-stack software.",
+      "I’m a Computer Science and Engineering student at UCLA. My studies and research cover computer architecture, digital integrated circuits, hardware security, embedded systems, machine learning, operating systems, and full-stack software.",
     education: {
       degree: "B.S. Computer Science & Engineering",
       institution: "University of California, Los Angeles",
@@ -23,7 +23,7 @@ export const homeData = {
       "Machine learning",
       "Software",
     ],
-    primaryTools: ["SystemVerilog", "C & C++", "Python"],
+    // primaryTools: ["Verilog", "SystemVerilog", "C & C++", "Python", "Java", "C#", "JavaScript", "HTML", "MATLAB", "MIPS", "RISC-V", "ARM", "Lisp", "Shell", "Haskell"],
     links: {
       github: "https://github.com/GaussianDoge",
       linkedin: "https://www.linkedin.com/in/zhengwen-tang-18124827a/",
@@ -39,7 +39,7 @@ export const homeData = {
     },
   },
   experience: {
-    eyebrow: "01 / PROFESSIONAL EXPERIENCE",
+    eyebrow: "01 / EXPERIENCE & RESEARCH",
     title: "Research across security and architecture.",
     summary: "Embedded security, measurement automation, and chiplet-GPU scheduling.",
     date: "May 2026 — Present",
@@ -66,34 +66,9 @@ export const homeData = {
       },
     ],
   },
-  research: {
-    eyebrow: "02 / RESEARCH",
-    title: "Studying behavior below the software layer.",
-    affiliation: "Secure Systems and Architectures Lab, UCLA",
-    focus: "Hardware security · Computer architecture",
-    lead:
-      "My research connects instruction-level measurements with architecture-level decisions across secure embedded systems and AI hardware.",
-    items: [
-      {
-        title: "Power side-channel analysis",
-        description:
-          "Study instruction-level power traces from cryptographic workloads using embedded firmware, lab instrumentation, signal processing, and machine-learning analysis.",
-      },
-      {
-        title: "Repeatable measurement automation",
-        description:
-          "Build scripts and firmware workflows that make board programming, trace capture, and experiment reproduction more reliable.",
-      },
-      {
-        title: "Chiplet GPU architecture",
-        description:
-          "Explore scheduling policies and chiplet placement for LLM workloads on chiplet-based GPU architectures.",
-      },
-    ],
-  },
   projects: {
-    eyebrow: "03 / PROJECTS",
-    title: "Work organized by engineering discipline.",
+    eyebrow: "02 / PROJECTS",
+    title: "Projects.",
     summary:
       "Seven projects, each with its own page, technical decisions, and supporting evidence.",
     categories: [
@@ -135,54 +110,34 @@ export const homeData = {
     ],
   },
   coursework: {
-    eyebrow: "04 / RELEVANT COURSEWORK",
-    title: "The foundation behind the work.",
+    eyebrow: "03 / RELEVANT COURSEWORK",
+    title: "Relevant coursework.",
     summary:
-      "Coursework across hardware, systems, software, artificial intelligence, and theory.",
-    groups: [
-      {
-        title: "Hardware & architecture",
-        courses: [
-          "Computer Systems Architecture",
-          "Digital Circuits",
-          "Digital Design",
-          "Digital Design Laboratory",
-          "Design and Experimental Verification of CMOS Circuits",
-          "Electrical and Electronic Circuits",
-          "Systems and Signals",
-        ],
-      },
-      {
-        title: "Systems & security",
-        courses: [
-          "Operating Systems",
-          "Computer System Security",
-          "Network Fundamentals",
-          "Programming Languages",
-          "Software Construction",
-        ],
-      },
-      {
-        title: "Software & AI",
-        courses: [
-          "Data Structures",
-          "Machine Learning",
-          "Neural Networks & Deep Learning",
-          "Computer Graphics",
-        ],
-      },
-      {
-        title: "Theory & mathematics",
-        courses: [
-          "Algorithms and Complexity",
-          "Theory of Computation",
-          "Probability and Statistics",
-        ],
-      },
+      "Courses spanning hardware, systems, software, artificial intelligence, and theory.",
+    courses: [
+      "Computer Systems Architecture",
+      "Digital Circuits",
+      "Digital Design",
+      "Digital Design Laboratory",
+      "Design and Experimental Verification of CMOS Circuits",
+      "Electrical and Electronic Circuits",
+      "Systems and Signals",
+      "Operating Systems",
+      "Computer System Security",
+      "Network Fundamentals",
+      "Programming Languages",
+      "Software Construction",
+      "Data Structures",
+      "Machine Learning",
+      "Neural Networks & Deep Learning",
+      "Computer Graphics",
+      "Algorithms and Complexity",
+      "Theory of Computation",
+      "Probability and Statistics",
     ],
   },
   background: {
-    eyebrow: "05 / BACKGROUND",
+    eyebrow: "04 / BACKGROUND",
     title: "Across the hardware–software boundary.",
     paragraphs: [
       "I’m studying Computer Science and Engineering at the University of California, Los Angeles. My work spans processor microarchitecture, digital implementation, embedded control, hardware security research, machine learning, and full-stack applications.",
@@ -208,7 +163,7 @@ export const homeData = {
     },
   ],
   contact: {
-    eyebrow: "06 / CONTACT",
+    eyebrow: "05 / CONTACT",
     title: "Let’s build something tangible.",
     description:
       "For embedded systems, digital design, software engineering, and hardware research conversations.",

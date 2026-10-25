@@ -11,7 +11,6 @@ function HomePage() {
   const {
     profile,
     experience,
-    research,
     projects,
     coursework,
     background,
@@ -32,10 +31,9 @@ function HomePage() {
   }, []);
 
   return (
-    <main id="main">
+    <main id="main" className="home-page">
       <Hero profile={profile} />
       <ExperienceSection experience={experience} />
-      <ResearchSection research={research} />
       <ProjectsSection projects={projects} />
       <CourseworkSection coursework={coursework} />
       <BackgroundSection background={background} profile={profile} skills={skills} />
@@ -88,7 +86,7 @@ function Hero({ profile }) {
         </dl>
       </div>
 
-      <figure className="chip-figure">
+      {/* <figure className="chip-figure">
         <div className="figure-top">
           <span>01 / {artifact.label}</span>
           <span>{artifact.discipline}</span>
@@ -105,9 +103,9 @@ function Hero({ profile }) {
           <span>{artifact.title}</span>
           <span>Project artifact</span>
         </figcaption>
-      </figure>
+      </figure> */}
 
-      <div className="hero-foot">
+      {/* <div className="hero-foot">
         <span>{profile.education.shortInstitution} · Computer Science & Engineering</span>
         <span>
           {profile.primaryTools.map((tool, index) => (
@@ -117,7 +115,7 @@ function Hero({ profile }) {
             </span>
           ))}
         </span>
-      </div>
+      </div> */}
     </section>
   );
 }
@@ -161,33 +159,6 @@ function ExperienceSection({ experience }) {
           </div>
         </div>
       </article>
-    </section>
-  );
-}
-
-function ResearchSection({ research }) {
-  return (
-    <section className="research-section section" id="research" aria-labelledby="research-title">
-      <div className="wrap research-layout">
-        <div>
-          <p className="eyebrow">{research.eyebrow}</p>
-          <h2 id="research-title">{research.title}</h2>
-          <p className="research-affiliation">{research.affiliation}</p>
-          <p className="research-role">{research.focus}</p>
-        </div>
-        <div className="research-body">
-          <p className="research-lead">{research.lead}</p>
-          {research.items.map((item, index) => (
-            <article className="research-item" key={item.title}>
-              <span>{sectionNumber(index)}</span>
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
     </section>
   );
 }
@@ -246,19 +217,11 @@ function CourseworkSection({ coursework }) {
         </div>
         <p>{coursework.summary}</p>
       </div>
-      <div className="course-grid">
-        {coursework.groups.map((group, index) => (
-          <article className="course-group" key={group.title}>
-            <span>{sectionNumber(index)}</span>
-            <h3>{group.title}</h3>
-            <ul>
-              {group.courses.map((course) => (
-                <li key={course}>{course}</li>
-              ))}
-            </ul>
-          </article>
+      <ul className="course-list" aria-label="Relevant coursework">
+        {coursework.courses.map((course) => (
+          <li key={course}>{course}</li>
         ))}
-      </div>
+      </ul>
     </section>
   );
 }

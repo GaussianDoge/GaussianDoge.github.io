@@ -20,6 +20,8 @@ function SectionLink({ section, children, className = '' }) {
 
 export default function SiteLayout() {
   const location = useLocation();
+  const activeSection = new URLSearchParams(location.search).get('section');
+  const homeActive = location.pathname === '/' && !activeSection;
   const projectsActive = location.pathname.startsWith('/projects');
 
   const skipToContent = (event) => {
@@ -48,8 +50,15 @@ export default function SiteLayout() {
         </Link>
 
         <nav className="site-nav" aria-label="Main navigation">
+          <Link
+            to="/"
+            className={homeActive ? 'route-active' : undefined}
+            aria-current={homeActive ? 'page' : undefined}
+            onClick={returnToTop}
+          >
+            Home
+          </Link>
           <SectionLink section="experience">Experience</SectionLink>
-          <SectionLink section="research">Research</SectionLink>
           <Link
             to="/projects"
             className={projectsActive ? 'route-active' : undefined}
