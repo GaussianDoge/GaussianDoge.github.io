@@ -191,6 +191,7 @@
 /* Compact homepage rhythm. All visible text remains 14px or larger. */
 .home-page .hero{display:block;padding-block:48px 42px}
 .home-page .hero-copy{display:grid;grid-template-columns:minmax(360px,.88fr) minmax(0,1.12fr);align-items:end;gap:clamp(48px,7vw,112px);max-width:none}
+.home-page .hero-identity{transform:translateY(-100px)}
 .home-page .hero-identity .eyebrow{margin-bottom:18px}
 .home-page h1{margin-bottom:0}
 .home-page .hero-summary{padding-bottom:5px}
@@ -240,6 +241,7 @@
 
 @media(max-width:900px){
   .home-page .hero-copy{grid-template-columns:1fr;gap:24px}
+  .home-page .hero-identity{transform:none}
   .home-page .hero-summary{padding-bottom:0}
   .home-page .intro{max-width:680px}
 }
